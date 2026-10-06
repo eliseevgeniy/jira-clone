@@ -1,0 +1,164 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sprintCard {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.sprintHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.sprintName {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+
+.sprintGoal {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.sprintMeta {
+  display: flex;
+  gap: 24px;
+}
+
+.metaLabel {
+  display: block;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.metaValue {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.metaValueStrong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.progressWrap {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: #ebecf0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-success);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.progressLabel {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.filtersRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 8px 16px 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.userFilter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+
+.userFilterLabel {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.select {
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  font-size: 13px;
+  background: #fafbfc;
+  font-family: inherit;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: #fff;
+}
+
+.badge {
+  background: #deebff;
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  text-transform: lowercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sprintHead {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sprintMeta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .filtersRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

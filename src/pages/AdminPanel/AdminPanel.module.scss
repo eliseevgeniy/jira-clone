@@ -1,0 +1,131 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.section {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.table tr:hover td {
+  background: #fafbfc;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 32px 12px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: #ebecf0;
+  color: var(--color-text-muted);
+}
+
+.badge.todo {
+  background: #ebecf0;
+  color: #42526e;
+}
+
+.badge.in-progress {
+  background: #deebff;
+  color: var(--color-primary);
+}
+
+.badge.testing {
+  background: #fff0b3;
+  color: #7f5f01;
+}
+
+.badge.done {
+  background: #e3fcef;
+  color: #006644;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Статусы спринтов */
+.badge.planned {
+  background: #deebff;
+  color: var(--color-primary);
+}
+
+.badge.active {
+  background: #e3fcef;
+  color: #006644;
+}
+
+.badge.closed {
+  background: #ebecf0;
+  color: #42526e;
+}

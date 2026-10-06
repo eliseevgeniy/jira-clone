@@ -1,70 +1,151 @@
-# Getting Started with Create React App
+# Jira Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Учебный проект — аналог Jira для управления задачами, спринтами и командой.
+Разработан на **React** в рамках итогового проекта.
 
-## Available Scripts
+![React](https://img.shields.io/badge/React-18-blue)
+![Redux](https://img.shields.io/badge/Redux-Toolkit-purple)
+![SCSS](https://img.shields.io/badge/Styles-SCSS-pink)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-In the project directory, you can run:
+## Демо
 
-### `npm start`
+🔗 **Живая версия:** _[добавлю после деплоя на Vercel]_
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Возможности
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🏠 Рабочий стол (`/`)
+- Карточка активного спринта с прогресс-баром и оставшимся временем
+- Статистика: всего задач / в работе / выполнено / просрочено
+- Вкладки **Product** и **Backlog** с фильтрацией задач
+- Фильтр по участнику команды + режим **«only my issues»**
+- Список выполненных задач
+- **Burndown-график** активного спринта (идеальная линия vs реальный остаток)
 
-### `npm test`
+### 📋 Активный спринт (`/sprint`)
+- Kanban-доска с 4 колонками: **To Do → In Progress → Testing → Done**
+- **Drag & drop** карточек между колонками (dnd-kit)
+- Фильтр задач по участнику команды
+- Счётчики задач в каждой колонке
+- Индикатор вложений на карточке (📎 N)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ⚙️ Панель администратора (`/admin`)
+- **Создание задачи**: заголовок, подзаголовок, автор, исполнитель, наблюдатели, приоритет, время выполнения, описание, комментарии, **прикрепление файлов**
+- Автоматическая генерация ID задачи в формате `XX-1234`
+- **Создание спринта** с авто-подсчётом даты окончания
+- **Добавление участника** команды (ФИО, должность, подразделение)
+- Таблицы всех сущностей проекта
 
-### `npm run build`
+## Стек технологий
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Слой | Технологии |
+|------|-----------|
+| **Основа** | React 18, Create React App |
+| **Состояние** | Redux Toolkit, React Redux |
+| **Роутинг** | React Router v6 |
+| **Формы** | React Hook Form |
+| **Drag & drop** | dnd-kit (core, sortable, utilities) |
+| **Графики** | Recharts |
+| **Даты** | dayjs |
+| **Стили** | SCSS Modules + CSS-переменные |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Установка и запуск
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Требования
+- **Node.js** 16+ ([скачать](https://nodejs.org/))
+- **npm** 8+ (идёт в комплекте с Node.js)
 
-### `npm run eject`
+### Шаги
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+# 1. Клонировать репозиторий
+git clone https://github.com/eliseevgeniy/jira-clone.git
+cd jira-clone
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# 2. Установить зависимости
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# 3. Запустить дев-сервер
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Приложение откроется на [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+### Сборка для продакшена
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm run build
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Готовые файлы появятся в папке `build/`.
 
-### Code Splitting
+## Структура проекта
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+src/
+├── app/                    # Redux store, хуки, роутинг
+│   ├── store.js
+│   └── hooks.js
+├── pages/                  # Три страницы приложения
+│   ├── Dashboard/          # Рабочий стол
+│   ├── ActiveSprint/       # Kanban-доска
+│   └── AdminPanel/         # Формы создания
+├── features/               # Redux-слайсы
+│   ├── tasks/
+│   ├── sprints/
+│   └── users/
+├── shared/
+│   ├── ui/                 # Переиспользуемые UI-компоненты
+│   │   ├── Input/
+│   │   ├── Textarea/
+│   │   ├── Select/
+│   │   ├── Button/
+│   │   ├── Modal/
+│   │   └── FileInput/
+│   └── lib/                # Утилиты
+│       ├── generateId.js
+│       ├── formatDuration.js
+│       ├── dateHelpers.js
+│       └── burndown.js
+├── styles/
+│   └── global.scss         # Глобальные стили и SCSS-переменные
+├── App.jsx                 # Корневой компонент с роутингом
+└── index.js                # Точка входа
+```
 
-### Analyzing the Bundle Size
+## Реализованные требования ТЗ
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- ✅ **K1** — проект создан на Create React App + React
+- ✅ **K2** — стили на SCSS (модули + глобальные переменные)
+- ✅ **K3** — три страницы: Рабочий стол, Активный спринт, Панель администратора
+- ✅ **K4** — drag & drop задач между колонками Kanban
+- ✅ **K5** — валидация всех форм (обязательные поля, минимальная длина, проверка влезания в спринт)
+- ✅ **K6** — адаптивность под ПК и планшет
+- ✅ **Продвинутый уровень** — Burndown-график статистики спринта
 
-### Making a Progressive Web App
+## Особенности реализации
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Генерация ID задачи** — формат `XX-1234`, где `X` — буква, `1234` — последовательность цифр от 1 до 9.
+- **Формат времени выполнения** — часы и дни: `6ч`, `1д 6ч`, `2д`.
+- **Проверка влезания в спринт** — при создании задачи валидируется, что её длительность не превышает оставшееся время спринта. Рядом с полем показывается живая подсказка.
+- **Авто-подсчёт даты окончания спринта** — при смене даты начала или длительности дата окончания пересчитывается автоматически.
+- **Валидация ФИО участника** — 2–3 слова, каждое с большой буквы, только буквы и дефис.
+- **Переиспользуемые поля ввода** — `Input`, `Textarea`, `Select`, `FileInput`, `Button`, `Modal` — используются во всех формах проекта.
 
-### Advanced Configuration
+## Скриншоты
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+_Раздел заполню после деплоя._
 
-### Deployment
+## Лицензия
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+MIT — свободно используйте в учебных целях.
 
-### `npm run build` fails to minify
+## Автор
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Евгений Гений**
+- GitHub: [eliseevgeniy](https://github.com/eliseevgeniy)
+- Email: eliseevgeniy@gmail.com
+
+---
+
+_Учебный проект, 2026 год._
