@@ -10,7 +10,9 @@
 
 ## Демо
 
-🔗 **Живая версия:** _[добавлю после деплоя на Vercel]_
+🔗 **Живая версия:** https://jira-clone-psi-green.vercel.app
+
+📦 **Исходный код:** https://github.com/eliseevgeniy/jira-clone
 
 ## Возможности
 
