@@ -19,6 +19,21 @@ const DURATIONS = [
   { value: '4', label: '4 недели' },
 ];
 
+const countWorkingDays = (start, end) => {
+  if (!start || !end) return 0;
+  let from = dayjs(start).startOf('day');
+  const to = dayjs(end).startOf('day');
+  if (to.isBefore(from)) return 0;
+
+  let count = 0;
+  while (from.isBefore(to) || from.isSame(to, 'day')) {
+    const dow = from.day();
+    if (dow !== 0 && dow !== 6) count++;
+    from = from.add(1, 'day');
+  }
+  return count;
+};
+
 export const CreateSprintForm = ({ open, onClose }) => {
   const dispatch = useAppDispatch();
   const sprints = useAppSelector((s) => s.sprints.items);
@@ -45,7 +60,6 @@ export const CreateSprintForm = ({ open, onClose }) => {
   const startDate = watch('startDate');
   const durationWeeks = watch('durationWeeks');
 
-  // Автоматический пересчёт endDate при изменении startDate или duration
   useEffect(() => {
     if (startDate && durationWeeks) {
       const weeks = Number(durationWeeks);
@@ -55,9 +69,7 @@ export const CreateSprintForm = ({ open, onClose }) => {
   }, [startDate, durationWeeks, setValue]);
 
   const endDate = watch('endDate');
-  const workingDays = startDate && endDate
-    ? dayjs(endDate).diff(dayjs(startDate), 'day')
-    : 0;
+  const workingDays = countWorkingDays(startDate, endDate);
 
   const onSubmit = (data) => {
     const sprint = {
@@ -79,7 +91,6 @@ export const CreateSprintForm = ({ open, onClose }) => {
     onClose();
   };
 
-  // Имена спринтов не должны повторяться
   const validateName = (value) => {
     const trimmed = value.trim();
     if (!trimmed) return 'Обязательное поле';
@@ -162,11 +173,11 @@ export const CreateSprintForm = ({ open, onClose }) => {
 
           <Input
             label="Дата окончания (рассчитывается автоматически)"
-            type="date"
+            type="text"
             readOnly
             className={styles.readonly}
+            value={endDate ? dayjs(endDate).format('DD.MM.YYYY') : ''}
             error={errors.endDate?.message}
-            {...register('endDate')}
           />
 
           <p className={styles.hint}>
