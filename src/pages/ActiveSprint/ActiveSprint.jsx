@@ -80,7 +80,7 @@ export default function ActiveSprint() {
             <span className={styles.metaValue}>{formatDate(activeSprint.endDate)}</span>
           </div>
           <div>
-            <span className={styles.metaLabel}>Осталось</span>
+            <span className={styles.metaLabel}>Осталось (раб.)</span>
             <span className={styles.metaValueStrong}>
               {formatDuration(hoursLeft)}
             </span>

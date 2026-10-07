@@ -5,7 +5,7 @@ import { DoneList } from './components/DoneList';
 import { BurndownChart } from './components/BurndownChart';
 import { Tabs } from './components/Tabs';
 import { buildBurndownData } from '../../shared/lib/burndown';
-import { remainingHours, formatDate } from '../../shared/lib/dateHelpers';
+import { workingHoursLeft, formatDate } from '../../shared/lib/dateHelpers';
 import { formatDuration } from '../../shared/lib/formatDuration';
 import styles from './Dashboard.module.scss';
 
@@ -58,7 +58,7 @@ export default function Dashboard() {
       inProgress: userTasks.filter((t) => t.status === 'in-progress').length,
       done: userTasks.filter((t) => t.status === 'done').length,
       overdue:
-        activeSprint && remainingHours(activeSprint.endDate) <= 0
+        activeSprint && workingHoursLeft(activeSprint.endDate) <= 0
           ? userTasks.filter((t) => t.status !== 'done').length
           : 0,
     };
@@ -95,9 +95,9 @@ export default function Dashboard() {
                 </span>
               </div>
               <div>
-                <span className={styles.metaLabel}>Осталось</span>
+                <span className={styles.metaLabel}>Осталось (раб.)</span>
                 <span className={styles.metaValueStrong}>
-                  {formatDuration(remainingHours(activeSprint.endDate))}
+                  {formatDuration(workingHoursLeft(activeSprint.endDate))}
                 </span>
               </div>
             </div>

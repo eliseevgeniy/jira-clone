@@ -1,4 +1,4 @@
-import { remainingHours } from './dateHelpers';
+import { workingHoursLeft } from './dateHelpers';
 
 export const formatDuration = (hours) => {
   const h = Number(hours);
@@ -11,7 +11,7 @@ export const formatDuration = (hours) => {
 };
 
 export const sprintHint = (durationHours, endDate) => {
-  const total = Math.max(0, remainingHours(endDate));
+  const total = Math.max(0, workingHoursLeft(endDate));
   const left = total - Number(durationHours || 0);
   return {
     total,
